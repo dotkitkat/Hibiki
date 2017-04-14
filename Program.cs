@@ -2,11 +2,11 @@
 
 namespace Hibiki
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            new HibikiBot().RunAndBlockAsync().GetAwaiter().GetResult();
         }
     }
 }

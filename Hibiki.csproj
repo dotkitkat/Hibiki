@@ -4,6 +4,11 @@
         <TargetFramework>netcoreapp1.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <Content Include=".gitignore"/>
+        <PackageReference Include="Discord.Net.Commands">
+            <Version>1.0.0-rc</Version>
+        </PackageReference>
+        <PackageReference Include="Discord.Net.WebSocket">
+            <Version>1.0.0-rc</Version>
+        </PackageReference>
     </ItemGroup>
 </Project>
