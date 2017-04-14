@@ -1,6 +1,0 @@
-# .NET Core files
-bin/
-obj/
-
-# Config
-hibikiconfig.json
