@@ -1,5 +1,6 @@
 ﻿using Discord.Commands;
 using System.Threading.Tasks;
+using Discord.WebSocket;
 
 namespace Hibiki.Modules.Utilities
 {
@@ -9,7 +10,13 @@ namespace Hibiki.Modules.Utilities
         [Command("Ping"), Summary("Pong!")]
         public async Task Invoke()
         {
-            await ReplyAsync("Pong!");
+            var DiscordSocketClient = Context.Client as DiscordSocketClient;
+            if (DiscordSocketClient != null)
+                await ReplyAsync("Pong! Latency: " + DiscordSocketClient.Latency);
+            else
+            {
+                await ReplyAsync("Pong!");
+            }
         }
     }
 }

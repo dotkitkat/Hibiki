@@ -14,4 +14,7 @@
     <ItemGroup>
         <Folder Include="Modules\Fun"/>
     </ItemGroup>
+    <ItemGroup>
+        <Content Include=".gitignore"/>
+    </ItemGroup>
 </Project>
