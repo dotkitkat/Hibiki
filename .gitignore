@@ -1,0 +1,6 @@
+# .NET Core files
+bin/
+obj/
+
+# Config
+hibiki.json
