@@ -10,19 +10,25 @@ namespace Hibiki
     {
         private static Dictionary<string, string> Core = new Dictionary<string, string>();
 
+        /// <summary>
+        /// Loads a specified JSON file (defaults to hibikiconfig.json) into memory.
+        /// </summary>
+        /// <param name="options">Options to load with.</param>
+        /// <returns></returns>
         public static async Task LoadAsync(LoadOptions options = null)
         {
             await Task.Run(async () =>
             {
                 try
                 {
-                    var ConfigText = File.ReadAllText(@"hibikiconfig.json");
+                    var ConfigText = File.ReadAllText(options == null ? @"hibikiconfig.json" : options.ConfigLocation);
                     Core = JsonConvert.DeserializeObject<Dictionary<string, string>>(ConfigText);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.ReadKey();
                     await Logger.ErrorAsync("Cannot read from configuration file. Exiting...");
+                    await Logger.ErrorAsync(e.Message);
+                    Console.Read();
                     Environment.Exit(0);
                 }
             });

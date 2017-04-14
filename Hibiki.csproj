@@ -11,4 +11,7 @@
             <Version>1.0.0-rc</Version>
         </PackageReference>
     </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Modules\Fun"/>
+    </ItemGroup>
 </Project>

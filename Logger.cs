@@ -7,7 +7,7 @@ namespace Hibiki
     {
         internal static async Task LogAsync(string text, string category = null)
         {
-            await Console.Out.WriteLineAsync($"[Hibiki] {(category != null ? "[" + category + "] " : "")} {text}");
+            await Console.Out.WriteLineAsync($"[Hibiki] {(category != null ? "[" + category + "] " : "")}{text}");
         }
 
         internal static async Task ErrorAsync(string text)

@@ -3,4 +3,4 @@ bin/
 obj/
 
 # Config
-hibiki.json
+hibikiconfig.json
