@@ -5,6 +5,8 @@ using Discord.WebSocket;
 using Discord.Commands;
 using Discord;
 using Discord.Net;
+using Hibiki.Database;
+using MongoDB.Driver;
 
 namespace Hibiki
 {
@@ -12,20 +14,26 @@ namespace Hibiki
     {
         public DiscordSocketClient Client;
         public CommandService Commands;
+        public MongoClient Mongo;
 
         public async Task InitializeAsync()
         {
-            Client = new DiscordSocketClient();
+            await Task.Run(async () =>
+            {
+                await Configuration.LoadAsync();
+                Client = new DiscordSocketClient();
+                var MongoResult = await Configuration.TrySearchAsync("MongoIp");
+                Mongo = MongoResult.Success ? new MongoClient(MongoResult.Result) : new MongoClient("mongodb://localhost:27017");
+            });
         }
 
         public async Task RunAndBlockAsync()
         {
             await InitializeAsync();
 
-            await Configuration.LoadAsync();
-
             var Map = new DependencyMap();
             Map.Add(Client);
+            Map.Add(Mongo);
 
             var MessageHandler = new MessageHandler();
             await MessageHandler.SetupAsync(Map);

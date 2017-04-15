@@ -14,5 +14,10 @@ namespace Hibiki
         {
             await LogAsync(text, "Error");
         }
+
+        internal static async Task DebugAsync(string text)
+        {
+            await LogAsync(text, "Debug");
+        }
     }
 }

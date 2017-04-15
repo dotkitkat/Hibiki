@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Hibiki;
 using Discord.WebSocket;
 using Discord.Commands;
+using Hibiki.Database;
+using Hibiki.Database.Structures;
+using MongoDB.Driver;
 
 namespace Hibiki
 {
@@ -14,6 +17,7 @@ namespace Hibiki
         public DiscordSocketClient Client;
         public CommandService Commands;
         public DependencyMap Map;
+        public MongoClient Mongo;
 
         public async Task SetupAsync(DependencyMap map)
         {
@@ -23,6 +27,7 @@ namespace Hibiki
             {
                 DefaultRunMode = RunMode.Async
             });
+            Mongo = Map.Get<MongoClient>();
 
             Client.MessageReceived += HandleAsync;
 
@@ -37,12 +42,11 @@ namespace Hibiki
 
             var Context = new CommandContext(Client, Message);
 
-            var ConfigResult = await Configuration.TrySearchAsync("Prefix");
-            if (!ConfigResult.Success) throw new ConfigurationException();
+            string Prefix = await PrefixManager.GetPrefixAsync(Mongo, Context.Guild);
 
-            if (Message == null || Author == null || Message.Content == ConfigResult.Result ||
+            if (Message == null || Author == null || Message.Content == Prefix ||
                 !(Message.HasMentionPrefix(Client.CurrentUser, ref argPos) ||
-                  Message.HasStringPrefix(ConfigResult.Result, ref argPos))) return false;
+                  Message.HasStringPrefix(Prefix, ref argPos))) return false;
 
             var SearchResult = Commands.Search(Context, argPos);
 
@@ -60,7 +64,7 @@ namespace Hibiki
                         return false;
 
                     case ParseResult PResult:
-                        Response = $":anger: There was an error parsing your command: `{PResult.ErrorReason}";
+                        Response = $":anger: There was an error parsing your command: `{PResult.ErrorReason}`";
                         break;
 
                     case PreconditionResult PcResult:

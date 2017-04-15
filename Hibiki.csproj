@@ -10,9 +10,9 @@
         <PackageReference Include="Discord.Net.WebSocket">
             <Version>1.0.0-rc</Version>
         </PackageReference>
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Modules\Fun"/>
+        <PackageReference Include="MongoDB.Driver">
+            <Version>2.4.3</Version>
+        </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <Content Include=".gitignore"/>
