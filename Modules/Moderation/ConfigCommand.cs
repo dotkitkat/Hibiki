@@ -8,16 +8,16 @@ using MongoDB.Driver;
 namespace Hibiki.Modules.Moderation
 {
     [Name("Moderation")]
-    public class SettingsCommand: ModuleBase
+    public class ConfigCommand: ModuleBase
     {
         private readonly MongoClient _Mongo;
 
-        public SettingsCommand(IDependencyMap map)
+        public ConfigCommand(IDependencyMap map)
         {
             _Mongo = map.Get<MongoClient>();
         }
 
-        [Command("config"), Summary("Check the current configuration for this server."), RequirePermission(AccessLevel.ServerOwner)]
+        [Command("Config"), Summary("Check the current configuration for this server."), RequirePermission(AccessLevel.ServerOwner)]
         public async Task InvokeDefault()
         {
             var Settings = await _Mongo.GetCollection<Settings>().GetByGuildAsync(Context.Guild);

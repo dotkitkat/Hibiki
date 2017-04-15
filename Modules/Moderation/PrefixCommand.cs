@@ -17,8 +17,8 @@ namespace Hibiki.Modules.Moderation
             _Mongo = map.Get<MongoClient>();
         }
 
-        [Command("Prefix"), Summary("Changes the prefix for a server."), RequirePermission(AccessLevel.ServerOwner)]
-        public async Task ChangePrefix(string newPrefix)
+        [Command("Prefix"), Summary("Change the prefix for a server."), RequirePermission(AccessLevel.ServerOwner)]
+        public async Task Prefix(string newPrefix)
         {
             var AllSettings = _Mongo.GetCollection<Settings>();
             var GuildSettings = await AllSettings.GetByGuildAsync(Context.Guild);
@@ -26,6 +26,12 @@ namespace Hibiki.Modules.Moderation
             GuildSettings.Prefix = newPrefix;
             await AllSettings.SaveAsync(GuildSettings);
             await ReplyAsync($"Prefix changed to `{newPrefix}`!");
+        }
+
+        [Command("Prefix"), Summary("View the prefix for a server.")]
+        public async Task Prefix()
+        {
+            await ReplyAsync($"Current prefix: `{await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)}`");
         }
     }
 }
