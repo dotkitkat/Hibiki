@@ -1,2 +1,2 @@
 # Hibiki
-An open-source Discord bot
+An open-source Discord bot.
