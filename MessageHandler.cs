@@ -32,8 +32,6 @@ namespace Hibiki
             });
             Mongo = Map.Get<MongoClient>();
 
-            Commands.AddTypeReader<ShopItem>(new ShopItemTypeReader());
-
             Client.MessageReceived += HandleAsync;
 
             await Commands.AddModulesAsync(Assembly.GetEntryAssembly());
