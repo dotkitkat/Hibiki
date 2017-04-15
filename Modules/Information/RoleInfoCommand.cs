@@ -10,7 +10,8 @@ namespace Hibiki.Modules.Information
         [Command("RoleInfo"), Summary("Gets information for a role."), RequireContext(ContextType.Guild)]
         public async Task InvokeDefault(IRole role)
         {
-            var Embed = new EmbedBuilder { Title = "Information for role " + role.Name };
+            var Embed = Common.Embeds.Embed.Info();
+            Embed.Title = "Information for role " + role.Name;
             Embed.AddInlineField("ID", role.Id);
             Embed.AddInlineField("Guild", role.Guild.Name);
             Embed.AddInlineField("Position", role.Position);

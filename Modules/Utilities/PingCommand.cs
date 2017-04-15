@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using System.Threading.Tasks;
 using Discord.WebSocket;
+using Hibiki.Common.Extensions;
 
 namespace Hibiki.Modules.Utilities
 {
@@ -12,10 +13,10 @@ namespace Hibiki.Modules.Utilities
         {
             var DiscordSocketClient = Context.Client as DiscordSocketClient;
             if (DiscordSocketClient != null)
-                await ReplyAsync("Pong! Latency: " + DiscordSocketClient.Latency + "ms");
+                await Context.Responder().Message("Pong! Latency: " + DiscordSocketClient.Latency + "ms").Send();
             else
             {
-                await ReplyAsync("Pong!");
+                await Context.Responder().Message("Pong!").Send();
             }
         }
     }

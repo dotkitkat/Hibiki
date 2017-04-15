@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using Hibiki;
 using Discord.WebSocket;
 using Discord.Commands;
+using Hibiki.Common.Extensions;
 using Hibiki.Database;
 using Hibiki.Database.Structures;
+using Hibiki.Structures;
+using Hibiki.Typereaders;
 using MongoDB.Driver;
 
 namespace Hibiki
@@ -23,11 +26,13 @@ namespace Hibiki
         {
             Map = map;
             Client = Map.Get<DiscordSocketClient>();
-            Commands = new CommandService(new CommandServiceConfig()
+            Commands = new CommandService(new CommandServiceConfig
             {
                 DefaultRunMode = RunMode.Async
             });
             Mongo = Map.Get<MongoClient>();
+
+            Commands.AddTypeReader<ShopItem>(new ShopItemTypeReader());
 
             Client.MessageReceived += HandleAsync;
 
@@ -64,20 +69,20 @@ namespace Hibiki
                         return false;
 
                     case ParseResult PResult:
-                        Response = $":anger: There was an error parsing your command: `{PResult.ErrorReason}`";
+                        Response = $"There was an error parsing your command: `{PResult.ErrorReason}`";
                         break;
 
                     case PreconditionResult PcResult:
-                        Response = $":anger: A precondition failed: `{PcResult.ErrorReason}`";
+                        Response = $"A precondition failed: `{PcResult.ErrorReason}`";
                         break;
 
                     case ExecuteResult EResult:
                         Response =
-                            $":anger: Command failed to execute. If this continues, please contact the bot developer.\n **Exception details:** `{EResult.Exception.Message}";
+                            $"Command failed to execute. If this continues, please contact the bot developer.\n **Exception details:** `{EResult.Exception.Message}";
                         break;
                 }
 
-                await Message.Channel.SendMessageAsync(Response);
+                await Context.Responder().Failure().Message(Response).Send();
                 return false;
             }
 

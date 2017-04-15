@@ -10,11 +10,6 @@ namespace Hibiki
     {
         private static Dictionary<string, string> Core = new Dictionary<string, string>();
 
-        /// <summary>
-        /// Loads a specified JSON file (defaults to hibikiconfig.json) into memory.
-        /// </summary>
-        /// <param name="options">Options to load with.</param>
-        /// <returns></returns>
         public static async Task LoadAsync(LoadOptions options = null)
         {
             await Task.Run(async () =>
@@ -34,11 +29,6 @@ namespace Hibiki
             });
         }
 
-        /// <summary>
-        /// Searchs the current configuration for the specified key.
-        /// </summary>
-        /// <param name="key">The key to search for.</param>
-        /// <returns>Result container. See <see cref="ConfigurationSearchResult" /></returns>
         public static async Task<ConfigurationSearchResult> TrySearchAsync(string key)
         {
             return await Task.Run(() =>

@@ -1,20 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp1.1</TargetFramework>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="Discord.Net.Commands">
-            <Version>1.0.0-rc</Version>
-        </PackageReference>
-        <PackageReference Include="Discord.Net.WebSocket">
-            <Version>1.0.0-rc</Version>
-        </PackageReference>
-        <PackageReference Include="MongoDB.Driver">
-            <Version>2.4.3</Version>
-        </PackageReference>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include=".gitignore"/>
-    </ItemGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Discord.Net.Commands">
+      <Version>1.0.0-rc</Version>
+    </PackageReference>
+    <PackageReference Include="Discord.Net.WebSocket">
+      <Version>1.0.0-rc</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Driver">
+      <Version>2.4.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+  </ItemGroup>
+  <Target Name="CopyDataFiles" AfterTargets="Build">
+    <Copy SourceFiles="Data/shop_items.json" DestinationFolder="$(OutputPath)/Data" ContinueOnError="true" />
+  </Target>
 </Project>

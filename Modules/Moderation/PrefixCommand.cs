@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
+using Hibiki.Common.Extensions;
 using Hibiki.Common.Permissions;
 using Hibiki.Database;
 using Hibiki.Database.Structures;
@@ -25,13 +26,19 @@ namespace Hibiki.Modules.Moderation
 
             GuildSettings.Prefix = newPrefix;
             await AllSettings.SaveAsync(GuildSettings);
-            await ReplyAsync($"Prefix changed to `{newPrefix}`!");
+            await Context.Responder()
+                .Success()
+                .Message($"Prefix changed to `{newPrefix}`!")
+                .Send();
         }
 
         [Command("Prefix"), Summary("View the prefix for a server.")]
         public async Task Prefix()
         {
-            await ReplyAsync($"Current prefix: `{await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)}`");
+            await Context.Responder()
+                .Format(":information_source:")
+                .Message($"Current prefix: `{await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)}`")
+                .Send();
         }
     }
 }

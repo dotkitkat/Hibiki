@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -19,6 +20,16 @@ namespace Hibiki.Common.Permissions
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class RequirePermissionAttribute: PreconditionAttribute
     {
+        private static Dictionary<AccessLevel, string> AlTranslations = new Dictionary<AccessLevel, string>
+        {
+            {AccessLevel.Blocked, "Blocked"},
+            {AccessLevel.IsPrivate, "DM Channel"},
+            {AccessLevel.User, "User"},
+            {AccessLevel.ServerModerator, "Moderator"},
+            {AccessLevel.ServerOwner, "Server Owner"},
+            {AccessLevel.BotOwner, "Bot Owner"}
+        };
+
         private readonly AccessLevel _Level;
         private MongoClient _Mongo;
 
@@ -34,7 +45,7 @@ namespace Hibiki.Common.Permissions
 
             var Access = await GetPermissionsAsync(_Mongo, context, _Level);
 
-            return await Task.FromResult(Access >= _Level ? PreconditionResult.FromSuccess() : PreconditionResult.FromError("Insufficient permissions."));
+            return await Task.FromResult(Access >= _Level ? PreconditionResult.FromSuccess() : PreconditionResult.FromError("This command requires the " + AlTranslations[_Level] + " permission."));
         }
 
         public async Task<AccessLevel> GetPermissionsAsync(MongoClient mongo, ICommandContext context,

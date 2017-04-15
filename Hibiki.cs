@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord.WebSocket;
@@ -7,6 +8,7 @@ using Discord;
 using Discord.Net;
 using Hibiki.Database;
 using MongoDB.Driver;
+using Hibiki.Events;
 
 namespace Hibiki
 {
@@ -34,6 +36,9 @@ namespace Hibiki
             var Map = new DependencyMap();
             Map.Add(Client);
             Map.Add(Mongo);
+
+            var Manager = new EventManager();
+            await Manager.RegisterEventsAsync(Map);
 
             var MessageHandler = new MessageHandler();
             await MessageHandler.SetupAsync(Map);

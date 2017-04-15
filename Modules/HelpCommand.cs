@@ -35,7 +35,8 @@ namespace Hibiki.Modules
                 .GroupBy(c => c.Module.IsSubmodule ? c.Module.Parent.Name : c.Module.Name);
 
             var Builder = new StringBuilder();
-            var Embed = new EmbedBuilder { Title = "You can use the following commands." };
+            var Embed = Common.Embeds.Embed.Info();
+            Embed.Title = "You can use the following commands.";
 
             foreach (var Group in CommandGroups)
             {
@@ -51,6 +52,9 @@ namespace Hibiki.Modules
                 $"\nYou can use `{await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)}help <command>` for more information on that command.");
 
             Embed.Description = Builder.ToString();
+
+            await Logger.DebugAsync("Breakpoint-3");
+            await Logger.DebugAsync(Builder.ToString());
 
             await Context.Channel.SendMessageAsync(string.Empty, embed: Embed);
         }
@@ -72,10 +76,8 @@ namespace Hibiki.Modules
                 Builder.AppendLine($"Found {CommandInfos.Count} {(CommandInfos.Count > 1 ? "entries" : "entry")} for `{command}`");
                 foreach (var Command in CommandInfos)
                 {
-                    var Embed = new EmbedBuilder()
-                    {
-                        Title = "Command " + Command.Name
-                    };
+                    var Embed = Common.Embeds.Embed.Info();
+                    Embed.Title = "Command " + Command.Name;
                     Embed.AddInlineField("Usage",
                         $"\t{await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)}{(Command.Module.IsSubmodule ? $"{Command.Module.Name} " : "")}{Command.Name} " +
                         string.Join(" ", Command.Parameters.Select(FormatParam)).Replace("`", ""));
