@@ -13,10 +13,10 @@ namespace Hibiki.Modules.Utilities
         {
             var DiscordSocketClient = Context.Client as DiscordSocketClient;
             if (DiscordSocketClient != null)
-                await Context.Responder().Message("Pong! Latency: " + DiscordSocketClient.Latency + "ms").Send();
+                await Context.Responder().Message("Pong! Latency: " + DiscordSocketClient.Latency + "ms").SendAsync();
             else
             {
-                await Context.Responder().Message("Pong!").Send();
+                await Context.Responder().Message("Pong!").SendAsync();
             }
         }
     }

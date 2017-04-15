@@ -65,7 +65,7 @@ namespace Hibiki
                         return false;
 
                     case ParseResult PResult:
-                        Response = $"There was an error parsing your command: `{PResult.ErrorReason}`";
+                        Response = PResult.Error == CommandError.BadArgCount ? $"Not enough arguments." : $"There was an error parsing your command: `{PResult.ErrorReason}`";
                         break;
 
                     case PreconditionResult PcResult:
@@ -78,7 +78,7 @@ namespace Hibiki
                         break;
                 }
 
-                await Context.Responder().Failure().Message(Response).Send();
+                await Context.Responder().Failure().Message(Response).SendAsync();
                 return false;
             }
 

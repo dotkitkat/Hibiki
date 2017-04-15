@@ -29,16 +29,16 @@ namespace Hibiki.Modules.Moderation
             await Context.Responder()
                 .Success()
                 .Message($"Prefix changed to `{newPrefix}`!")
-                .Send();
+                .SendAsync();
         }
 
         [Command("Prefix"), Summary("View the prefix for a server.")]
         public async Task Prefix()
         {
             await Context.Responder()
-                .Format(":information_source:")
+                .Emoji(":information_source:")
                 .Message($"Current prefix: `{await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)}`")
-                .Send();
+                .SendAsync();
         }
     }
 }

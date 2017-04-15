@@ -34,7 +34,7 @@ namespace Hibiki.Common.Messages
             return this;
         }
 
-        internal CommandResponder Format(string emoji)
+        internal CommandResponder Emoji(string emoji)
         {
             _Emoji = emoji;
             return this;
@@ -46,7 +46,13 @@ namespace Hibiki.Common.Messages
             return this;
         }
 
-        internal async Task Send(bool useTTS = false, RequestOptions options = null)
+        internal async Task ReplyAsync(bool useTTS = false, RequestOptions options = null)
+        {
+            _MessageContent = _Context.User.Mention + ", " + _MessageContent;
+            await SendAsync(useTTS, options);
+        }
+
+        internal async Task SendAsync(bool useTTS = false, RequestOptions options = null)
         {
             await _Context.Channel.SendMessageAsync(_Emoji + " | " + (_MessageContent ?? ""), useTTS, _MessageEmbed);
         }

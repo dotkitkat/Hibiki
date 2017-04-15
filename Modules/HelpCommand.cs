@@ -53,9 +53,6 @@ namespace Hibiki.Modules
 
             Embed.Description = Builder.ToString();
 
-            await Logger.DebugAsync("Breakpoint-3");
-            await Logger.DebugAsync(Builder.ToString());
-
             await Context.Channel.SendMessageAsync(string.Empty, embed: Embed);
         }
 
