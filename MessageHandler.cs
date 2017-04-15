@@ -9,8 +9,6 @@ using Discord.Commands;
 using Hibiki.Common.Extensions;
 using Hibiki.Database;
 using Hibiki.Database.Structures;
-using Hibiki.Structures;
-using Hibiki.Typereaders;
 using MongoDB.Driver;
 
 namespace Hibiki
