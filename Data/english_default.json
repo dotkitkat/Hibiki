@@ -1,0 +1,10 @@
+{
+  "ping_latency": "Pong! Gateway latency: {{latency}}ms",
+  "ping_no_latency": "Pong!",
+  "language_test": "Language test success!",
+  "errors_insufficient_arguments": "Not enough arguments.",
+  "errors_parse_failed": "There was an error parsing your command: `{{parseFailedReason}}`",
+  "errors_precondition_failed": "A precondition failed: `{{preconditionFailedReason}}`",
+  "errors_execution_failed": "Command failed to execute. If this continues, please contact the bot developer.\n **Exception details:** `{{executeFailedReason}}`",
+  "errors_commands_unknown": "Something went wrong. If this continues, please contact the bot developer.\n **Exception details:** `{{commandFailedReason}}`"
+}

@@ -17,4 +17,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
+  <Target Name="CopyDataFiles" AfterTargets="Build">
+    <Copy SourceFiles="Data/english_default.json" DestinationFolder="$(OutputPath)/Data" ContinueOnError="true"/>
+  </Target>
 </Project>

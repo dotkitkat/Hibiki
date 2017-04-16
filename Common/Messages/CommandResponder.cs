@@ -56,5 +56,7 @@ namespace Hibiki.Common.Messages
         {
             await _Context.Channel.SendMessageAsync(_Emoji + " | " + (_MessageContent ?? ""), useTTS, _MessageEmbed);
         }
+
+        public override string ToString() => _Emoji + " | " + (_MessageContent ?? "");
     }
 }

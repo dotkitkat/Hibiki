@@ -12,7 +12,7 @@ using Hibiki.Common.Permissions;
 namespace Hibiki.Modules.Bot
 {
     [Name("Bot")]
-    public class Status: ModuleBase
+    public class BotInfo: ModuleBase
     {
         [Command("BotInfo"), Summary("Gets information about the bot.")]
         [RequireOwner]
@@ -32,7 +32,7 @@ namespace Hibiki.Modules.Bot
                 Embed.AddInlineField("Guilds", DiscordSocketClient.Guilds.Count);
                 Embed.AddInlineField("Channels", DiscordSocketClient.Guilds.Sum(guild => guild.Channels.Count));
                 Embed.AddInlineField("Users", DiscordSocketClient.Guilds.Sum(guild => guild.Users.Count));
-                await Context.Message.Channel.SendMessageAsync(string.Empty, embed: Embed);
+                await Context.EmbedAsync(Embed);
             }
         }
 

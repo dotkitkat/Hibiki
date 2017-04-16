@@ -2,6 +2,7 @@
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Hibiki.Common.Extensions;
 using Hibiki.Common.Permissions;
 
 namespace Hibiki.Modules.Bot
@@ -22,7 +23,7 @@ namespace Hibiki.Modules.Bot
             Embed.Title = "Feature Request";
             Embed.Description = requestContent;
             Embed.AddInlineField("Author", Context.User.Username);
-            await RequestsChannel.SendMessageAsync(string.Empty, embed: Embed);
+            await RequestsChannel.SendEmbedAsync(Embed);
         }
     }
 }

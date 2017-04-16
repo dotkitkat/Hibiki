@@ -4,6 +4,7 @@ using Discord;
 using Hibiki.Database.Interfaces;
 using MongoDB.Bson;
 using Hibiki.Common.Embeds;
+using Hibiki.Common.Language;
 
 namespace Hibiki.Database.Structures
 {
@@ -13,9 +14,11 @@ namespace Hibiki.Database.Structures
 
         public ulong GuildId { get; set; }
 
-        public string Prefix { get; set; }
+        public string Prefix { get; set; } = ">";
 
         public List<string> BadWords { get; set; } = new List<string>(0);
+
+        public Languages Language { get; set; } = Languages.EnglishDefault;
 
         public EmbedBuilder AsEmbed(IGuild guild)
         {

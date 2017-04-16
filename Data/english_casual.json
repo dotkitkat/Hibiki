@@ -1,0 +1,10 @@
+{
+  "ping_latency": "hey there o/ (latency: {{latency}}ms)",
+  "ping_no_latency": "hey there o/",
+  "language_test": "the language test works \\o/",
+  "errors_insufficient_arguments": "not enough arguments !!",
+  "errors_parse_failed": "something went wrong while parsing ;-; here, have some details: `{{parseFailedReason}}`",
+  "errors_precondition_failed": "ssomething happened with the preconditions: `{{preconditionFailedReason}}`",
+  "errors_execution_failed": "the command failed to execute! if this happens again, please contact the bot dev !! \n **Exception details:** `{{executeFailedReason}}`",
+  "errors_commands_unknown": "i think i broke it... i don't know what happened, but it didn't work! if this happens again, please contact the bot dev! \n **Exception details:** `{{commandFailedReason}}`"
+}
