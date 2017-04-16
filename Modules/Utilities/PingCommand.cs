@@ -1,5 +1,7 @@
-﻿using Discord.Commands;
+﻿using System.Threading;
+using Discord.Commands;
 using System.Threading.Tasks;
+using Discord;
 using Discord.WebSocket;
 using Hibiki.Common.Extensions;
 using Hibiki.Common.Language;

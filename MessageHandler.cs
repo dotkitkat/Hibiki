@@ -67,7 +67,7 @@ namespace Hibiki
 
             try
             {
-                var Result = await Commands.ExecuteAsync(Context, ArgPos, Map);
+                var Result = await Commands.ExecuteAsync(Context, ArgPos, Map, MultiMatchHandling.Best);
                 await Logger.LogAsync(
                     $"Command {(SearchResult.IsSuccess ? SearchResult.Commands.First().Command.Name + " was successfully executed" : "failed to execute")} by {Context.User} in channel #{Context.Channel.Name} on server {Context.Guild.Name}");
                 if (Result.IsSuccess) return true;
@@ -75,7 +75,7 @@ namespace Hibiki
 
                 switch (Result)
                 {
-                    case SearchResult SResult:
+                    case SearchResult _:
                         return false;
 
                     case ParseResult PResult:
