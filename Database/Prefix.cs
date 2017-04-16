@@ -14,11 +14,8 @@ namespace Hibiki.Database
             var AllSettings = client.GetCollection<Settings>();
             var GuildSettings = await AllSettings.GetByGuildAsync(guild);
 
-            await Logger.DebugAsync(GuildSettings.Prefix);
-
             if (GuildSettings.Prefix == null)
             {
-                await Logger.DebugAsync("GuildSettings.Prefix is null!");
                 var Result = await Configuration.TrySearchAsync("Prefix");
                 if (Result.Success)
                 {

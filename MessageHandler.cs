@@ -52,32 +52,22 @@ namespace Hibiki
 
         public async Task<bool> HandleAsync(SocketMessage message)
         {
-            await Logger.DebugAsync("brk1");
             var ArgPos = 0;
             var Message = message as SocketUserMessage;
             var Author = message.Author as SocketGuildUser;
 
             var Context = new CommandContext(Client, Message);
-
-            await Logger.DebugAsync("brk1-2");
             var Prefix = await PrefixManager.GetPrefixAsync(Mongo, Context.Guild);
-            await Logger.DebugAsync("brk2");
 
             if (Message == null || Author == null || Message.Content == Prefix ||
                 !(Message.HasMentionPrefix(Client.CurrentUser, ref ArgPos) ||
                   Message.HasStringPrefix(Prefix, ref ArgPos))) return false;
 
-            await Logger.DebugAsync("brk3");
-
             var SearchResult = Commands.Search(Context, ArgPos);
-
-            await Logger.DebugAsync("brk4");
 
             try
             {
-                await Logger.DebugAsync("brk5");
                 var Result = await Commands.ExecuteAsync(Context, ArgPos, Map);
-                await Logger.DebugAsync("brk6");
                 await Logger.LogAsync(
                     $"Command {(SearchResult.IsSuccess ? SearchResult.Commands.First().Command.Name + " was successfully executed" : "failed to execute")} by {Context.User} in channel #{Context.Channel.Name} on server {Context.Guild.Name}");
                 if (Result.IsSuccess) return true;
