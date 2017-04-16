@@ -13,7 +13,7 @@ namespace Hibiki.Modules.Information
             var Embed = Common.Embeds.Embed.Success();
             var User = user ?? Context.User;
             Embed.ImageUrl = User.GetAvatarUrl();
-            Embed.Author = new EmbedAuthorBuilder()
+            Embed.Author = new EmbedAuthorBuilder
             {
                 IconUrl = User.GetAvatarUrl(),
                 Name = User.Username

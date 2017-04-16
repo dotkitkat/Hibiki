@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
 using Hibiki.Common.Extensions;
+using Hibiki.Common.Language;
 using Hibiki.Common.Permissions;
 using Hibiki.Database;
 using Hibiki.Database.Structures;
@@ -28,7 +29,7 @@ namespace Hibiki.Modules.Moderation
             await AllSettings.SaveAsync(GuildSettings);
             await Context.Responder()
                 .Success()
-                .Message($"Prefix changed to `{newPrefix}`!")
+                .Message((await LanguageManager.GetStringAsync(_Mongo, "change_prefix", Context.Guild)).Replace("{{prefix}}", newPrefix))
                 .SendAsync();
         }
 
@@ -37,7 +38,7 @@ namespace Hibiki.Modules.Moderation
         {
             await Context.Responder()
                 .Emoji(":information_source:")
-                .Message($"Current prefix: `{await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)}`")
+                .Message((await LanguageManager.GetStringAsync(_Mongo, "current_prefix", Context.Guild)).Replace("{{prefix}}", await PrefixManager.GetPrefixAsync(_Mongo, Context.Guild)))
                 .SendAsync();
         }
     }

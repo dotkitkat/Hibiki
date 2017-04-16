@@ -6,5 +6,7 @@
   "errors_parse_failed": "something went wrong while parsing ;-; here, have some details: `{{parseFailedReason}}`",
   "errors_precondition_failed": "ssomething happened with the preconditions: `{{preconditionFailedReason}}`",
   "errors_execution_failed": "the command failed to execute! if this happens again, please contact the bot dev !! \n **Exception details:** `{{executeFailedReason}}`",
-  "errors_commands_unknown": "i think i broke it... i don't know what happened, but it didn't work! if this happens again, please contact the bot dev! \n **Exception details:** `{{commandFailedReason}}`"
+  "errors_commands_unknown": "i think i broke it... i don't know what happened, but it didn't work! if this happens again, please contact the bot dev! \n **Exception details:** `{{commandFailedReason}}`",
+  "current_prefix": "so you can use this to ask me commands: `{{prefix}}`",
+  "change_prefix": "you want something different? ok, now use this: `{{prefix}}`"
 }

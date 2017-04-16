@@ -22,8 +22,6 @@ namespace Hibiki.Modules.Bot
             Embed.Title = "Status";
             Embed.Description = Status.ToString();
             await Context.EmbedAsync(Embed);
-            await Context.Responder().Message("hello!").ReplyAsync();
-            await Context.Responder().ReplyAsync();
         }
     }
 }

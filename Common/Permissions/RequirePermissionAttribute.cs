@@ -20,7 +20,7 @@ namespace Hibiki.Common.Permissions
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class RequirePermissionAttribute: PreconditionAttribute
     {
-        private static Dictionary<AccessLevel, string> AlTranslations = new Dictionary<AccessLevel, string>
+        private static readonly Dictionary<AccessLevel, string> AlTranslations = new Dictionary<AccessLevel, string>
         {
             {AccessLevel.Blocked, "Blocked"},
             {AccessLevel.IsPrivate, "DM Channel"},

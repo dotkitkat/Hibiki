@@ -16,8 +16,6 @@ namespace Hibiki.Database.Structures
 
         public string Prefix { get; set; } = ">";
 
-        public List<string> BadWords { get; set; } = new List<string>(0);
-
         public Languages Language { get; set; } = Languages.EnglishDefault;
 
         public EmbedBuilder AsEmbed(IGuild guild)
@@ -27,6 +25,7 @@ namespace Hibiki.Database.Structures
             var Description = new StringBuilder();
             Description.AppendLine($"**Guild ID:** {GuildId}");
             Description.AppendLine($"**Prefix:** {Prefix}");
+            Description.AppendLine($"**Language:** {Language}");
             return Embed.WithDescription(Description.ToString());
         }
     }

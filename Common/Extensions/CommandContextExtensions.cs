@@ -12,9 +12,6 @@ namespace Hibiki.Common.Extensions
             await context.Channel.SendMessageAsync(string.Empty, useTTS, embed, options);
         }
 
-        internal static CommandResponder Responder(this ICommandContext context)
-        {
-            return new CommandResponder(context);
-        }
+        internal static CommandResponder Responder(this ICommandContext context) => new CommandResponder(context);
     }
 }

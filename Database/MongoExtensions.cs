@@ -13,6 +13,7 @@ namespace Hibiki.Database
     {
         internal static IMongoCollection<T> GetCollection<T>(this MongoClient mongo)
         {
+            Logger.DebugAsync("Accessing Hibiki Database").GetAwaiter().GetResult();
             var Db = mongo.GetDatabase("Hibiki");
             return Db.GetCollection<T>(typeof(T).Name);
         }
@@ -20,10 +21,24 @@ namespace Hibiki.Database
         internal static async Task<T> GetByGuildAsync<T>(this IMongoCollection<T> collection, IGuild guild)
             where T : IGuildIndexed, new()
         {
-            var Cursor = await collection.FindAsync(g => g.GuildId == guild.Id);
+            await Logger.DebugAsync("GBGA_ACCESS_DELIMITED");
+            IAsyncCursor<T> Cursor;
+            try
+            {
+                Cursor = await collection.FindAsync(g => g.GuildId == guild.Id);
+            }
+            catch (Exception e)
+            {
+                await Logger.DebugAsync(e.StackTrace + e.Message + e.Source);
+                Cursor = null;
+            }
+            await Logger.DebugAsync("FOUND_GUILD");
             var Result = await Cursor.FirstOrDefaultAsync();
 
+            await Logger.DebugAsync("GBGA_PROC_DB_1");
+            await Logger.DebugAsync(Result != null ? "RESULT_NOT_NULL" : "NO_RESULT");
             if (Result != null) return Result;
+            await Logger.DebugAsync("RESULT_TR_NULL");
 
             await collection.CreateGuildEntryAsync(guild);
             var CursorNew = await collection.FindAsync(g => g.GuildId == guild.Id);

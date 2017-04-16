@@ -41,7 +41,8 @@ namespace Hibiki.Common.Language
             }
             catch (Exception e)
             {
-                throw new LanguageException("An error occurred getting " + desired + " for language " + language);
+                return "An error occurred getting translation " + desired + " for language " + language +
+                       ". Please report this to the bot owner!";
             }
         }
 
