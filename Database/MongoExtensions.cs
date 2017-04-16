@@ -20,16 +20,7 @@ namespace Hibiki.Database
         internal static async Task<T> GetByGuildAsync<T>(this IMongoCollection<T> collection, IGuild guild)
             where T : IGuildIndexed, new()
         {
-            IAsyncCursor<T> Cursor;
-            try
-            {
-                Cursor = await collection.FindAsync(g => g.GuildId == guild.Id);
-            }
-            catch (Exception e)
-            {
-                await Logger.DebugAsync(e.StackTrace + e.Message + e.Source);
-                Cursor = null;
-            }
+            var Cursor = await collection.FindAsync(g => g.GuildId == guild.Id);
             var Result = await Cursor.FirstOrDefaultAsync();
             if (Result != null) return Result;
 
