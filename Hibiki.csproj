@@ -17,7 +17,24 @@
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Attributes" />
+    <Folder Include="Common\Embeds" />
+    <Folder Include="Common\Language" />
+    <Folder Include="Common\Messages" />
+    <Folder Include="Common\Permissions" />
+    <Folder Include="Data" />
+    <Folder Include="Database\Interfaces" />
+    <Folder Include="Database\Structures" />
+    <Folder Include="Events" />
+    <Folder Include="Modules\Bot" />
+    <Folder Include="Modules\Information" />
+    <Folder Include="Modules\Language" />
+    <Folder Include="Modules\Moderation" />
+    <Folder Include="Modules\Utilities" />
+    <Folder Include="Typereaders" />
+  </ItemGroup>
   <Target Name="CopyDataFiles" AfterTargets="Build">
-    <Copy SourceFiles="Data/english_default.json" DestinationFolder="$(OutputPath)/Data" ContinueOnError="true"/>
+    <Copy SourceFiles="Data/english_default.json" DestinationFolder="$(OutputPath)/Data" ContinueOnError="true" />
   </Target>
 </Project>

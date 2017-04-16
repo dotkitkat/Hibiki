@@ -12,7 +12,7 @@ namespace Hibiki.Modules.Information
         {
             var Embed = Common.Embeds.Embed.Success();
             var User = user ?? Context.User;
-            Embed.ImageUrl = User.GetAvatarUrl();
+            Embed.ImageUrl = User.GetAvatarUrl().Replace("?size=128", "?size=1024");
             Embed.Author = new EmbedAuthorBuilder
             {
                 IconUrl = User.GetAvatarUrl(),
