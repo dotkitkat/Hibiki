@@ -19,7 +19,7 @@ namespace Hibiki.Modules.Language
 
         [Command("Lang"), Summary("Change the language for Hibiki for this guild."),
          RequirePermission(AccessLevel.ServerOwner)]
-        public async Task Change(Languages language)
+        public async Task Change(Common.Language.Language language)
         {
             await LanguageManager.ChangeLanguageAsync(_Mongo, language, Context.Guild);
             await Context.Responder()

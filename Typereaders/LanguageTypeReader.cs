@@ -10,18 +10,13 @@ namespace Hibiki.Typereaders
     {
         public override async Task<TypeReaderResult> Read(ICommandContext context, string input)
         {
-            var Map = new Dictionary<string, Languages>
+            var Lang = LanguageManager.GetLanguage(input);
+            if (Lang != null)
             {
-                {"en-casual", Languages.EnglishCasual},
-                {"en", Languages.EnglishDefault}
-            };
-
-            if (Map.ContainsKey(input))
-            {
-                return await Task.FromResult(TypeReaderResult.FromSuccess(Map[input]));
+                return await Task.FromResult(TypeReaderResult.FromSuccess(Lang));
             }
             return await Task.FromResult(TypeReaderResult.FromError(CommandError.ParseFailed,
-                "Invalid language. Available languages are: " + string.Join(", ", Map.Keys)));
+                "Invalid language. Available languages are: " + LanguageManager.GetAllSupported()));
         }
     }
 }

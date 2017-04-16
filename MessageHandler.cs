@@ -37,7 +37,7 @@ namespace Hibiki
 
             SetupCommmandsErrorEvent();
 
-            Commands.AddTypeReader<Languages>(new LanguageTypeReader());
+            Commands.AddTypeReader<Language>(new LanguageTypeReader());
 
             await Commands.AddModulesAsync(Assembly.GetEntryAssembly());
         }

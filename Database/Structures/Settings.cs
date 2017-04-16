@@ -16,7 +16,7 @@ namespace Hibiki.Database.Structures
 
         public string Prefix { get; set; } = ">";
 
-        public Languages Language { get; set; } = Languages.EnglishDefault;
+        public Language Language { get; set; } = LanguageManager.GetLanguage();
 
         public EmbedBuilder AsEmbed(IGuild guild)
         {
