@@ -24,7 +24,7 @@ namespace Hibiki.Modules.Language
             await LanguageManager.ChangeLanguageAsync(_Mongo, language, Context.Guild);
             await Context.Responder()
                 .Message(await LanguageManager.GetStringAsync(_Mongo, "language_test", Context.Guild))
-                .SendAsync();
+                .ReplyAsync();
         }
     }
 }

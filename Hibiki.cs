@@ -18,6 +18,14 @@ namespace Hibiki
         public CommandService Commands;
         public MongoClient Mongo;
 
+        public async Task InitializeWindowAsync()
+        {
+            await Task.Run(() =>
+            {
+                Console.Title = $"Hibiki Bot (Discord.NET {DiscordConfig.Version})";
+            });
+        }
+
         public async Task InitializeAsync()
         {
             await Task.Run(async () =>
@@ -31,6 +39,7 @@ namespace Hibiki
 
         public async Task RunAndBlockAsync()
         {
+            await InitializeWindowAsync();
             await InitializeAsync();
 
             var Map = new DependencyMap();

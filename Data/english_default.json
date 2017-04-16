@@ -1,7 +1,7 @@
 {
-  "ping_latency": "Pong! Gateway latency: {{latency}}ms",
-  "ping_no_latency": "Pong!",
-  "language_test": "Language test success!",
+  "ping_latency": "pong! Gateway latency: {{latency}}ms",
+  "ping_no_latency": "pong!",
+  "language_test": "language test success!",
   "errors_insufficient_arguments": "Not enough arguments.",
   "errors_parse_failed": "There was an error parsing your command: `{{parseFailedReason}}`",
   "errors_precondition_failed": "A precondition failed: `{{preconditionFailedReason}}`",

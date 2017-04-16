@@ -48,7 +48,7 @@ namespace Hibiki.Common.Messages
 
         internal async Task ReplyAsync(bool useTTS = false, RequestOptions options = null)
         {
-            _MessageContent = _Context.User.Mention + ", " + _MessageContent;
+            _MessageContent = "**" + _Context.User.Username + "**" + ", " + _MessageContent;
             await SendAsync(useTTS, options);
         }
 
