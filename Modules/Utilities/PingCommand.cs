@@ -24,14 +24,15 @@ namespace Hibiki.Modules.Utilities
         {
             var DiscordSocketClient = Context.Client as DiscordSocketClient;
             if (DiscordSocketClient != null)
-
                 await Context.Responder()
                     .Message((await LanguageManager.GetStringAsync(_Mongo, "ping_latency", Context.Guild)).Replace(
                         "{{latency}}", DiscordSocketClient.Latency.ToString()))
                     .ReplyAsync();
             else
             {
-                await Context.Responder().Message(await LanguageManager.GetStringAsync(_Mongo, "ping_no_latency", Context.Guild)).ReplyAsync();
+                await Context.Responder()
+                    .Message(await LanguageManager.GetStringAsync(_Mongo, "ping_no_latency", Context.Guild))
+                    .ReplyAsync();
             }
         }
     }

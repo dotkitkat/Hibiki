@@ -11,6 +11,11 @@ namespace Hibiki.Common.Messages
         private string _Emoji = ":white_check_mark:";
         private string _MessageContent;
 
+        internal static CommandResponder Create(ICommandContext context)
+        {
+            return new CommandResponder(context);
+        }
+
         internal CommandResponder(ICommandContext context)
         {
             _Context = context;
@@ -48,13 +53,13 @@ namespace Hibiki.Common.Messages
 
         internal async Task ReplyAsync(bool useTTS = false, RequestOptions options = null)
         {
-            _MessageContent = "**" + _Context.User.Username + "**" + ", " + _MessageContent;
+            _MessageContent = $"**{_Context.User.Username}**, {_MessageContent}";
             await SendAsync(useTTS, options);
         }
 
         internal async Task SendAsync(bool useTTS = false, RequestOptions options = null)
         {
-            await _Context.Channel.SendMessageAsync(_Emoji + " | " + (_MessageContent ?? ""), useTTS, _MessageEmbed);
+            await _Context.Channel.SendMessageAsync(_Emoji + " | " + (_MessageContent ?? ""), useTTS, _MessageEmbed, options);
         }
 
         public override string ToString() => _Emoji + " | " + (_MessageContent ?? "");

@@ -14,7 +14,7 @@ namespace Hibiki.Database.Structures
 
         public ulong GuildId { get; set; }
 
-        public string Prefix { get; set; } = ">";
+        public string Prefix { get; set; } = Configuration.SearchAsync("Prefix").GetAwaiter().GetResult();
 
         public Language Language { get; set; } = LanguageManager.GetLanguage();
 

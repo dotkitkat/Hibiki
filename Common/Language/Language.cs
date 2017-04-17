@@ -72,8 +72,7 @@ namespace Hibiki.Common.Language
 
         internal static async Task<string> GetStringAsync(MongoClient client, string desired, IGuild guild)
         {
-            var Guild = await client.GetCollection<Settings>().GetByGuildAsync(guild);
-            return await InternalGetStringAsync(Guild.Language, desired);
+            return await InternalGetStringAsync((await client.GetCollection<Settings>().GetByGuildAsync(guild)).Language, desired);
         }
 
         internal static async Task ChangeLanguageAsync(MongoClient client, Language desired, IGuild guild)

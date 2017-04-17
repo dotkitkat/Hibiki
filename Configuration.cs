@@ -41,6 +41,12 @@ namespace Hibiki
                 return CSearch;
             });
         }
+
+        public static async Task<string> SearchAsync(string key)
+        {
+            return (await TrySearchAsync(key)).Result;
+        }
+
     }
 
     public class ConfigurationSearchResult
